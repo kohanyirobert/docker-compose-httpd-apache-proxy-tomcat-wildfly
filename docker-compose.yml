@@ -1,0 +1,14 @@
+version: '2'
+services:
+  apache:
+    links:
+      - tomcat
+    build: ./apache
+    expose:
+      - "80"
+      - "443"
+    ports:
+      - "80:80"
+      - "443:443"
+  tomcat:
+    build: ./tomcat
