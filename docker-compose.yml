@@ -3,7 +3,11 @@ services:
   apache:
     links:
       - tomcat
-    build: ./apache
+      - wildfly
+    build:
+      context: ./apache
+      args:
+        link: 'tomcat'
     expose:
       - "80"
       - "443"
@@ -12,3 +16,23 @@ services:
       - "443:443"
   tomcat:
     build: ./tomcat
+    expose:
+      - "8009"
+      - "8080"
+      - "8443"
+    ports:
+      - "18009:8009"
+      - "18080:8080"
+      - "18443:8443"
+  wildfly:
+    build: ./wildfly
+    expose:
+      - "8009"
+      - "8080"
+      - "8443"
+      - "9990"
+    ports:
+      - "28009:8009"
+      - "28080:8080"
+      - "28443:8443"
+      - "29990:9990"
